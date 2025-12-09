@@ -4,109 +4,145 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
 <style>
-    body {
-        margin: 0;
-        padding: 0;
-        font-family: "Inter", sans-serif;
-        background: transparent;
-    }
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Inter", sans-serif;
+    background: transparent;
+    color: #4B4947;
+}
 
-    /* OUTER 3D PILLOW PANEL */
-    .panel {
-        width: 175px;
-        padding: 18px;
-        border-radius: 32px;
-        background: linear-gradient(180deg, #f3f1ee 0%, #d9d6d3 100%);
-        box-shadow:
-            inset 2px 2px 6px rgba(255,255,255,0.7),
-            inset -3px -3px 8px rgba(0,0,0,0.07),
-            0 8px 20px rgba(0,0,0,0.10);
-        backdrop-filter: blur(8px);
-        border: 1px solid rgba(255,255,255,0.55);
-    }
+/* ==============================
+   PANEL — widened + soft glow
+================================= */
+.panel {
+    width: 210px;  /* wider for Notion sidebar */
+    padding: 16px;
+    border-radius: 22px;
 
-    /* INNER MINI SECTIONS */
-    .section {
-        padding: 10px 12px;
-        border-radius: 20px;
-        background: linear-gradient(180deg, #ebe8e5 0%, #d8d5d2 100%);
-        margin-bottom: 14px;
-        box-shadow:
-            inset 2px 2px 4px rgba(255,255,255,0.6),
-            inset -3px -3px 6px rgba(0,0,0,0.05);
-    }
+    background: linear-gradient(to bottom, #FFFFFF 0%, #F4F3F1 100%);
 
-    .title-row {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        margin-bottom: 4px;
-    }
+    border: 1px solid rgba(80,78,76,0.22);
+    box-shadow:
+        0 3px 10px rgba(0,0,0,0.04),
+        0 8px 22px rgba(0,0,0,0.06),
+        inset 0 1px 3px rgba(255,255,255,0.6);
 
-    .title-row img {
-        width: 12px;
-        opacity: 0.7;
-    }
+    /* soft floating glow like left widget */
+    filter:
+        drop-shadow(0 1px 4px rgba(0,0,0,0.06))
+        drop-shadow(0 4px 12px rgba(0,0,0,0.04));
+}
 
-    .stat-title {
-        font-size: 10px;
-        text-transform: uppercase;
-        letter-spacing: 1.2px;
-        color: #6c6c6c;
-    }
+/* sheen */
+.panel::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 28%;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.55), transparent);
+    border-radius: inherit;
+}
 
-    .percent {
-        font-size: 15px;
-        font-weight: 600;
-        color: #222;
-        margin-bottom: 6px;
-    }
+/* ==============================
+   MINI LUXE CARD SECTIONS (A2)
+================================= */
+.section {
+    padding: 12px 14px;
+    border-radius: 18px;
 
-    /* 3D Capsule Progress Bar */
-    .bar {
-        width: 100%;
-        height: 7px;
-        background: linear-gradient(180deg, #c8c4c0, #b9b5b1);
-        border-radius: 40px;
-        overflow: hidden;
-        position: relative;
-        box-shadow:
-            inset 2px 2px 4px rgba(255,255,255,0.6),
-            inset -2px -2px 4px rgba(0,0,0,0.08);
-    }
+    background: linear-gradient(to bottom, #FFFFFF 0%, #F6F5F4 100%);
+    border: 1px solid rgba(80,78,76,0.22);
 
-    .fill {
-        height: 100%;
-        width: 0%;
-        background: linear-gradient(90deg, #5d5854, #918c88);
-        border-radius: 40px;
-        animation: fillBar 2s forwards ease;
-        position: relative;
-    }
+    box-shadow:
+        0 3px 10px rgba(0,0,0,0.03),
+        inset 0 1px 2px rgba(255,255,255,0.6);
 
-    /* Shimmer overlay */
-    .fill::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: -40px;
-        width: 40px;
-        height: 100%;
-        background: rgba(255,255,255,0.4);
-        filter: blur(4px);
-        animation: shimmer 2.8s infinite linear;
-    }
+    margin-bottom: 14px;
+}
 
-    @keyframes fillBar {
-        from { width: 0%; }
-        to { width: var(--progress); }
-    }
+/* title row */
+.title-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 6px;
+}
 
-    @keyframes shimmer {
-        0% { left: -40px; }
-        100% { left: 100%; }
-    }
+.title-row img {
+    width: 13px;
+    opacity: 0.7;
+    filter: brightness(0.4) sepia(0.2) saturate(0.6); /* warm stone tint */
+}
+
+.stat-title {
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 1.6px;
+    opacity: 0.6;
+}
+
+/* percent number */
+.percent {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 6px;
+    color: #3A3938;
+}
+
+/* ==============================
+   LUXE PROGRESS BAR
+================================= */
+.bar {
+    width: 100%;
+    height: 8px;
+    background: linear-gradient(to bottom, #EAE7E4, #D7D4CF);
+    border-radius: 40px;
+    overflow: hidden;
+
+    box-shadow:
+        inset 1px 1px 3px rgba(255,255,255,0.6),
+        inset -2px -2px 4px rgba(0,0,0,0.06);
+}
+
+.fill {
+    height: 100%;
+    width: 0%;
+
+    background: linear-gradient(90deg, #A7A39D, #7E7A75);
+    border-radius: 40px;
+
+    animation: fillBar 2s forwards ease-out;
+    position: relative;
+}
+
+/* Shimmer — softer & slower */
+.fill::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -50px;
+    width: 45px;
+    height: 100%;
+    background: rgba(255,255,255,0.35);
+    filter: blur(5px);
+
+    animation: shimmer 3.6s infinite linear;
+}
+
+@keyframes fillBar {
+    from { width: 0%; }
+    to { width: var(--progress); }
+}
+
+@keyframes shimmer {
+    0% { left: -50px; }
+    100% { left: 100%; }
+}
 </style>
 
 </head>
@@ -153,59 +189,60 @@
 </div>
 
 <script>
-    function calcProgress() {
-        const now = new Date();
+function calcProgress() {
+    const now = new Date();
 
-        // YEAR
-        const startY = new Date(now.getFullYear(),0,1);
-        const endY = new Date(now.getFullYear()+1,0,1);
-        const y = ((now - startY)/(endY - startY))*100;
+    // YEAR
+    const startY = new Date(now.getFullYear(),0,1);
+    const endY = new Date(now.getFullYear()+1,0,1);
+    const y = ((now - startY)/(endY - startY))*100;
 
-        // MONTH
-        const startM = new Date(now.getFullYear(), now.getMonth(), 1);
-        const endM = new Date(now.getFullYear(), now.getMonth()+1, 1);
-        const m = ((now - startM)/(endM - startM))*100;
+    // MONTH
+    const startM = new Date(now.getFullYear(), now.getMonth(), 1);
+    const endM = new Date(now.getFullYear(), now.getMonth()+1, 1);
+    const m = ((now - startM)/(endM - startM))*100;
 
-        // WEEK
-        const dow = (now.getDay() + 6) % 7;
-        const startW = new Date(now);
-        startW.setDate(now.getDate() - dow);
-        const endW = new Date(startW);
-        endW.setDate(startW.getDate() + 7);
-        const w = ((now - startW)/(endW - startW))*100;
+    // WEEK
+    const dow = (now.getDay() + 6) % 7;
+    const startW = new Date(now);
+    startW.setDate(now.getDate() - dow);
+    const endW = new Date(startW);
+    endW.setDate(startW.getDate() + 7);
+    const w = ((now - startW)/(endW - startW))*100;
 
-        // DAY
-        const startD = new Date(now.setHours(0,0,0,0));
-        const endD = new Date(now.setHours(24,0,0,0));
-        const d = ((Date.now() - startD)/(endD - startD))*100;
+    // DAY
+    const startD = new Date(now.setHours(0,0,0,0));
+    const endD = new Date(now.setHours(24,0,0,0));
+    const d = ((Date.now() - startD)/(endD - startD))*100;
 
-        animate("year", y);
-        animate("month", m);
-        animate("week", w);
-        animate("day", d);
-    }
+    animate("year", y);
+    animate("month", m);
+    animate("week", w);
+    animate("day", d);
+}
 
-    function animate(prefix, value) {
-        const percent = document.getElementById(prefix+"Percent");
-        const fill = document.getElementById(prefix+"Fill");
-        let start = 0;
-        let end = Math.round(value);
-        let duration = 1500;
-        let step = end / (duration / 16);
+function animate(prefix, value) {
+    const percent = document.getElementById(prefix+"Percent");
+    const fill = document.getElementById(prefix+"Fill");
 
-        let interval = setInterval(()=>{
-            start += step;
-            if(start >= end){
-                start = end;
-                clearInterval(interval);
-            }
-            percent.innerText = Math.round(start) + "%";
-        }, 16);
+    let start = 0;
+    let end = Math.round(value);
+    let duration = 1500;
+    let step = end / (duration / 16);
 
-        fill.style.setProperty("--progress", end + "%");
-    }
+    let interval = setInterval(()=>{
+        start += step;
+        if(start >= end){
+            start = end;
+            clearInterval(interval);
+        }
+        percent.innerText = Math.round(start) + "%";
+    }, 16);
 
-    calcProgress();
+    fill.style.setProperty("--progress", end + "%");
+}
+
+calcProgress();
 </script>
 
 </body>
